@@ -26,18 +26,25 @@ p {
 .parent-task {
     margin-bottom: 30px;
     font-size: 18px;
-    padding: 16px;
+    padding: 3%;
     float: left;
     text-align: left;
     background-color: rgb(248, 248, 248);
     border: 1px solid rgb(233, 233, 233);
     border-radius: 8px;
+    transition: opacity 3s ease-in-out;
 }
 
 .parent-task-content {
-    margin: 0;
+    /* margin: 0; */
+    margin-left: 5%;
     display: inline-block;
     max-width: 50%;
+}
+
+.sub-task-list {
+    display: none;
+
 }
 
 .sub-task {
@@ -297,4 +304,16 @@ button:hover {
     color: rgb(20, 104, 214);
     float: right;
     margin-right: 5%;
+}
+
+.fa-circle-chevron-up {
+    color: rgb(20, 104, 214);
+}
+
+.fa-circle-chevron-down {
+    color: rgb(20, 104, 214);
+}
+
+.sub-task-content.task-completed {
+    text-decoration: line-through;
 }

@@ -3,6 +3,7 @@ const taskDescriptionInput = document.getElementById("NewTask");
 const Button = document.getElementById("Button");
 const Emptytask = document.getElementById("Emptytask");
 const markAllasCompletedBtn = document.getElementById("mark-all-as-completed");
+const subTaskList = document.createElement('ul');
 
 // Button.addEventListener('click', addTask);
 
@@ -17,6 +18,7 @@ function addTask() {
     const newTask = {
         taskDescription: taskDescription,
         completed: false,
+        opened:false,
         subTasks: []
     };
 
@@ -28,9 +30,14 @@ function addTask() {
 function displayTasks() {
     const TaskList = document.getElementById("tasks");
     TaskList.innerHTML = "";
+    subTaskList.innerHTML = "";
 
     tasks.forEach((task, index) => {
         const parentTask = document.createElement("ul");
+
+
+        const parentTaskDropdown = document.createElement("span");
+        parentTaskDropdown.className = task.opened ? 'fa-solid fa-circle-chevron-up' : 'fa-solid fa-circle-chevron-down';
         const parentTaskContent = document.createElement("span");
         parentTaskContent.textContent = task.taskDescription;
         parentTask.className = "parent-task";
@@ -74,6 +81,7 @@ function displayTasks() {
             else{
                 markAllasCompletedBtn.textContent =  'Mark all as complete';
             }
+          parentTaskContent.className = "task-completed";
             displayTasks();
         });
 
@@ -102,26 +110,31 @@ function displayTasks() {
             else{
                 markAllasCompletedBtn.textContent =  'Mark all as complete';
             }
-              
 
-
+            
                 displayTasks();
+                if(task.opened = true){
+                 subTaskList.style.display = "block";
+            }
             }
         });
 
+        parentTask.appendChild(parentTaskDropdown);
         parentTask.appendChild(parentTaskContent);
         parentTask.appendChild(removeButton);
         parentTask.appendChild(completedButton);
         parentTask.appendChild(subtaskButton);
 
         // Display sub-tasks
-        const subTaskList = document.createElement('ul');
+        
         task.subTasks.forEach((subTask, subIndex) => {
             const subTaskItem = document.createElement('li');
             const subTaskItemContent = document.createElement('span');
             subTaskItemContent.textContent = subTask.subTaskDescription;
-            subTaskItemContent.className = 'sub-task-content';
+            subTaskItemContent.className = subTask.completed? 'sub-task-content task-completed' : 'sub-task-content';
+            subTaskList.className = 'sub-task-list';
             subTaskItem.className = 'sub-task';
+            
 
             // Add mark as complete button for sub-task
             const subTaskCompleteButton = document.createElement('span');
@@ -129,8 +142,11 @@ function displayTasks() {
 
             //Button event to mark sub task completed
             subTaskCompleteButton.addEventListener('click', () => {
+                
                 subTask.completed = !subTask.completed;
-
+                 
+                subTaskItemContent.classList.add('task-completed');
+                
               //Mark as complete if all sub tasks are marked complete
             if (task.subTasks.every(subTask => subTask.completed)) {
                 task.completed = true;
@@ -143,6 +159,7 @@ function displayTasks() {
             else{
                 markAllasCompletedBtn.textContent =  'Mark all as complete';
             }
+             
                 displayTasks();
             });
 
@@ -179,7 +196,14 @@ function displayTasks() {
         parentTask.appendChild(subTaskList);
         TaskList.appendChild(parentTask);
             
-        
+        //Make sub-tasks hidden bby default
+
+        parentTaskDropdown.addEventListener('click', ()=>{
+            task.opened = !task.opened;
+            parentTaskDropdown.className = task.opened ? 'fa-solid fa-circle-chevron-up' : 'fa-solid fa-circle-chevron-down';
+            subTaskList.style.display = task.opened ? 'block' : 'none';
+
+        })
     });
 
     
