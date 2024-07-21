@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do App</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/e11255e1f6.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -13,25 +14,23 @@
     <div class="container">
         <h3> To-Do List</h3>
         <p> Add items to your To-Do list</p>
-        <span style="text-align: center;"> <input type="text" id="NewTask" placeholder="Type in your task..."
-                required />
-            <button id="button" onclick="addTask()"> Add task</button>
+        <input type="text" id="NewTask" placeholder="Type in your task..." required />
+        <button id="button" onclick="addTask()"> Add task</button>
 
-            <span class="task-header">
-                <h3> Added Tasks </h3>
+        <span class="task-header">
+            <h3> Added Tasks </h3>
 
 
-                <button class="mark-all-as-completed" id="mark-all-as-completed" onclick="markAllasCompleted()"> Mark
-                    All as
-                    Completed </button>
-                <button class="delete-all" id="delete-all" onclick="deleteAll()"> Delete all tasks </button>
-            </span>
-            <div class="TaskContainer">
-                <ul id="tasks" class="tasks">
+            <button class="mark-all-as-completed" id="mark-all-as-completed" onclick="markAllasCompletedBtn()"> Mark
+                all as complete </button>
+            <button class="delete-all" id="delete-all" onclick="deleteAll()"> Delete all tasks </button>
+        </span>
+        <div class="TaskContainer">
+            <ul id="tasks" class="tasks">
 
-                </ul>
-            </div>
-            <p class="emptyTask" id="Emptytask"> No tasks!, your added task will appear here</p>
+            </ul>
+        </div>
+        <p class="emptyTask" id="Emptytask"> No tasks!, your added task will appear here</p>
     </div>
 
     <script src="script.js"></script>
